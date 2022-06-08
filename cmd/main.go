@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	db, err := sqlx.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/gogrpc")
+	db, err := sqlx.Open("mysql", "root:secret@tcp(localhost:3306)/gogrpc")
 	if err != nil {
 		log.Fatal(err)
 	}

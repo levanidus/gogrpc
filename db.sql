@@ -1,12 +1,12 @@
 CREATE TABLE authors(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE books(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE authors_books(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,19 +18,19 @@ CREATE TABLE authors_books(
     CONSTRAINT fk_book_id
     FOREIGN KEY (book_id) 
         REFERENCES books(id)    
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO authors VALUES (NULL,'Гоголь');
-INSERT INTO authors VALUES (NULL,'Толстой');
-INSERT INTO authors VALUES (NULL,'А. Стругацкий');
-INSERT INTO authors VALUES (NULL,'Б. Стругацкий');
+INSERT INTO authors VALUES (NULL,'Gogol');
+INSERT INTO authors VALUES (NULL,'Tolstoi');
+INSERT INTO authors VALUES (NULL,'A. Strugatskii');
+INSERT INTO authors VALUES (NULL,'B. Strugatskii');
 
-INSERT INTO books VALUES (NULL,'Ревизор');
-INSERT INTO books VALUES (NULL,'Мёртвые души');
-INSERT INTO books VALUES (NULL,'Анна Каренина');
-INSERT INTO books VALUES (NULL,'Война и мир');
-INSERT INTO books VALUES (NULL,'Пикник на обочине');
-INSERT INTO books VALUES (NULL,'Улитка на склоне');
+INSERT INTO books VALUES (NULL,'Checker');
+INSERT INTO books VALUES (NULL,'Dead souls');
+INSERT INTO books VALUES (NULL,'Anna Karenina');
+INSERT INTO books VALUES (NULL,'War and peace');
+INSERT INTO books VALUES (NULL,'Picnic');
+INSERT INTO books VALUES (NULL,'Ulitka na sklone');
 
 INSERT INTO authors_books VALUES (NULL,1,1);
 INSERT INTO authors_books VALUES (NULL,1,2);

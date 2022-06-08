@@ -18,7 +18,15 @@ func NewGRPCServer(db *sqlx.DB) *GRPCServer {
 
 func (s *GRPCServer) FindBooksByAuthor(ctx context.Context, req *api.AuthorRequest) (*api.BooksResponseList, error) {
 	var result = []*api.BookResponse{}
-	result = append(result, &api.BookResponse{Name: req.GetAuthor()})
+	books, err := s.repo.FindBooksByAuthor(req.GetAuthor())
+	if err != nil {
+		return &api.BooksResponseList{Books: result}, nil
+	}
+
+	for _, book := range books {
+		result = append(result, &api.BookResponse{Name: book})
+	}
+
 	return &api.BooksResponseList{Books: result}, nil
 }
 
