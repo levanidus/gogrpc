@@ -9,7 +9,7 @@ type Book struct {
 }
 
 type Author struct {
-	name string `db:"name"`
+	name string `db:"name,prefix=authors."`
 }
 
 type Repository struct {
@@ -43,4 +43,30 @@ func (r *Repository) FindBooksByAuthor(req string) ([]string, error) {
 	}
 
 	return books, nil
+}
+
+func (r *Repository) FindAuthorsByBook(req string) ([]string, error) {
+	authors := []string{}
+
+	rows, err := r.db.Query(`select authors.name from authors 
+									join authors_books  
+									on authors.id = authors_books.author_id
+									join books
+									on authors_books.book_id = books.id
+									where books.name=?`, req)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var author Author
+		if err := rows.Scan(&author.name); err != nil {
+			return nil, err
+		}
+		authors = append(authors, author.name)
+	}
+
+	return authors, nil
 }

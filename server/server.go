@@ -32,6 +32,14 @@ func (s *GRPCServer) FindBooksByAuthor(ctx context.Context, req *api.AuthorReque
 
 func (s *GRPCServer) FindAuthorsByBook(ctx context.Context, req *api.BookRequest) (*api.AuthorsResponseList, error) {
 	var result = []*api.AuthorResponse{}
-	result = append(result, &api.AuthorResponse{Name: req.GetBook()})
+	authors, err := s.repo.FindAuthorsByBook(req.GetBook())
+	if err != nil {
+		return &api.AuthorsResponseList{Authors: result}, nil
+	}
+
+	for _, author := range authors {
+		result = append(result, &api.AuthorResponse{Name: author})
+	}
+
 	return &api.AuthorsResponseList{Authors: result}, nil
 }

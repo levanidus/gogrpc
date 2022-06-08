@@ -18,8 +18,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.Ping()
-
 	s := grpc.NewServer()
 	srv := server.NewGRPCServer(db)
 
