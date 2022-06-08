@@ -6,12 +6,22 @@ import (
 	"log"
 	"net"
 
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc"
 )
 
 func main() {
+
+	db, err := sqlx.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/gogrpc")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.Ping()
+
 	s := grpc.NewServer()
-	srv := &server.GRPCServer{}
+	srv := server.NewGRPCServer(db)
 
 	api.RegisterFindBooksAuthorsServer(s, srv)
 

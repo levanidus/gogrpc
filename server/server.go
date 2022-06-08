@@ -3,9 +3,18 @@ package server
 import (
 	"context"
 	"gogrpc/api"
+	"gogrpc/repository"
+
+	"github.com/jmoiron/sqlx"
 )
 
-type GRPCServer struct{}
+type GRPCServer struct {
+	repo *repository.Repository
+}
+
+func NewGRPCServer(db *sqlx.DB) *GRPCServer {
+	return &GRPCServer{repo: repository.NewRepository(db)}
+}
 
 func (s *GRPCServer) FindBooksByAuthor(ctx context.Context, req *api.AuthorRequest) (*api.BooksResponseList, error) {
 	var result = []*api.BookResponse{}
