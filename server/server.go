@@ -12,9 +12,13 @@ type GRPCServer struct {
 	repo *repository.Repository
 }
 
+// Constructor
+
 func NewGRPCServer(db *sqlx.DB) *GRPCServer {
 	return &GRPCServer{repo: repository.NewRepository(db)}
 }
+
+// Searching books by author
 
 func (s *GRPCServer) FindBooksByAuthor(ctx context.Context, req *api.AuthorRequest) (*api.BooksResponseList, error) {
 	var result = []*api.BookResponse{}
@@ -29,6 +33,8 @@ func (s *GRPCServer) FindBooksByAuthor(ctx context.Context, req *api.AuthorReque
 
 	return &api.BooksResponseList{Books: result}, nil
 }
+
+// Searching authors by book
 
 func (s *GRPCServer) FindAuthorsByBook(ctx context.Context, req *api.BookRequest) (*api.AuthorsResponseList, error) {
 	var result = []*api.AuthorResponse{}

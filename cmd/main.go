@@ -13,10 +13,12 @@ import (
 
 func main() {
 
-	db, err := sqlx.Open("mysql", "root:secret@tcp(localhost:3306)/gogrpc")
+	db, err := sqlx.Connect("mysql", "root:secret@tcp(localhost:3306)/gogrpc")
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	defer db.Close()
 
 	s := grpc.NewServer()
 	srv := server.NewGRPCServer(db)
