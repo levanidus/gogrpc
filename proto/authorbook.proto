@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package api;
+
+option go_package="/api";
+
+service FindBooksAuthors {
+    rpc FindBooksByAuthor(AuthorRequest) returns (BooksResponseList) {}
+    rpc FindAuthorsByBook(BookRequest) returns (AuthorsResponseList) {}
+}
+
+message AuthorRequest {
+    string author = 1;
+}
+
+message BookRequest {
+    string book = 1;
+}
+
+message BookResponse {
+	string name = 1;
+}
+
+message BooksResponseList {
+    repeated BookResponse books = 1;
+}
+
+message AuthorResponse {
+	string name = 1;
+}
+
+message AuthorsResponseList {
+    repeated AuthorResponse authors = 1;
+}
+
+
+
