@@ -20,20 +20,30 @@
 
 ## Запуск приложения
 
+В ПАПКЕ С ПРОЕКТОМ
+
 1) Запускаем контейнер с mysql
 
+```bash
 docker run --rm --name gogrpcmysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=gogrpc -d mysql:5.7
+```
 
 2) Ждём секунд 10 для старта mysql в контейнере
 
 3) Импортируем дамп БД в контейнер
 
+```bash
 docker exec -i gogrpcmysql mysql -uroot -psecret -hlocalhost gogrpc < db.sql
+```
 
 4) Стартуем приложение 
 
+```bash
 go run cmd/main.go
+```
 
 5) С помощью grpc клиента делаем запросы к серверу - например
 
+```bash
 evans proto/authorbook.proto -p 8080
+```
