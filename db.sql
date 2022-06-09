@@ -25,11 +25,11 @@ INSERT INTO authors VALUES (NULL,'Tolstoi');
 INSERT INTO authors VALUES (NULL,'A. Strugatskii');
 INSERT INTO authors VALUES (NULL,'B. Strugatskii');
 
-INSERT INTO books VALUES (NULL,'Checker');
+INSERT INTO books VALUES (NULL,'Taras Bulba');
 INSERT INTO books VALUES (NULL,'Dead souls');
 INSERT INTO books VALUES (NULL,'Anna Karenina');
 INSERT INTO books VALUES (NULL,'War and peace');
-INSERT INTO books VALUES (NULL,'Picnic');
+INSERT INTO books VALUES (NULL,'Picnic na obochine');
 INSERT INTO books VALUES (NULL,'Ulitka na sklone');
 
 INSERT INTO authors_books VALUES (NULL,1,1);
